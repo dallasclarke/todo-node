@@ -46,27 +46,41 @@ Your options are:
 const handleMenu = function(input) {
 switch(input) {
     case '1':
-        console.log(message);
+        interface.question(message, add);
         break;
+    // case '2': 
+    //     interface.question(message2, )
     default:
-        console.log("You're quitting!!!")
+        console.log("You're quitting!!!");
+        interface.close();
 }
-interface.close();
 }
 
 interface.question(menu, handleMenu);
 
-const message = 'Okay Add a todo!';
+const message = 'What would you like to add to your todo?';
 
 const add = function(input) {
     
-    let userArray = [input, 'incomplete'];
-        toDos.push(userArray);
-    
+    let userArray = [];
+    userArray.push(input);
+    userArray.push(', incomplete');
+    toDos.push(userArray);
+    interface.close()
 }
-// displayToDos(toDos);
 
-interface.question(message, add);
+const saveToDo = function (str) {
+    const savedArr = [];
+
+    for (const list of str) {
+        savedArr.push(list[0] + list[1]);
+    }
+    savedArr.join('\n');
+    fs.writeFileSync('./todos.csv', savedArr);
+}
+
+
+
 
 
 
